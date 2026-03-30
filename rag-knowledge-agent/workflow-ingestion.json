@@ -1,0 +1,89 @@
+{
+  "name": "RAG - Document Ingestion Pipeline",
+  "description": "Watches Google Drive for new documents, chunks text, generates embeddings, and upserts to Pinecone vector database.",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Google Drive Trigger",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "position": [240, 300],
+      "parameters": {
+        "event": "fileCreated",
+        "folderId": "YOUR_GOOGLE_DRIVE_FOLDER_ID",
+        "pollTimes": { "item": [{ "mode": "everyMinute" }] }
+      }
+    },
+    {
+      "id": "2",
+      "name": "Download File",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [460, 300],
+      "parameters": {
+        "operation": "download",
+        "fileId": "={{ $json.id }}"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Extract & Chunk Text",
+      "type": "n8n-nodes-base.code",
+      "position": [680, 300],
+      "parameters": {
+        "jsCode": "// Chunk text into 500-token segments with 50-token overlap\nconst text = $input.item.json.data || '';\nconst fileName = $input.item.json.name || 'unknown';\nconst chunkSize = 500;\nconst overlap = 50;\nconst words = text.split(' ');\nconst chunks = [];\nlet i = 0;\nwhile (i < words.length) {\n  const chunk = words.slice(i, i + chunkSize).join(' ');\n  chunks.push({\n    text: chunk,\n    chunk_id: `${fileName}-chunk-${chunks.length}`,\n    source: fileName,\n    chunk_index: chunks.length\n  });\n  i += chunkSize - overlap;\n}\nreturn chunks.map(c => ({ json: c }));"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Generate Embeddings",
+      "type": "n8n-nodes-base.openAi",
+      "position": [900, 300],
+      "parameters": {
+        "operation": "embedding",
+        "model": "text-embedding-3-small",
+        "input": "={{ $json.text }}"
+      }
+    },
+    {
+      "id": "5",
+      "name": "Upsert to Pinecone",
+      "type": "n8n-nodes-base.pinecone",
+      "position": [1120, 300],
+      "parameters": {
+        "operation": "upsert",
+        "indexName": "knowledge-base",
+        "id": "={{ $json.chunk_id }}",
+        "values": "={{ $json.embedding }}",
+        "metadata": {
+          "text": "={{ $json.text }}",
+          "source": "={{ $json.source }}",
+          "chunk_index": "={{ $json.chunk_index }}"
+        }
+      }
+    },
+    {
+      "id": "6",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "position": [1340, 300],
+      "parameters": {
+        "operation": "append",
+        "spreadsheetId": "YOUR_GOOGLE_SHEETS_ID",
+        "sheetName": "IngestionLog",
+        "columns": {
+          "source": "={{ $json.source }}",
+          "chunks_created": "={{ $json.chunk_index + 1 }}",
+          "timestamp": "={{ new Date().toISOString() }}",
+          "status": "success"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Drive Trigger": { "main": [[{ "node": "Download File" }]] },
+    "Download File": { "main": [[{ "node": "Extract & Chunk Text" }]] },
+    "Extract & Chunk Text": { "main": [[{ "node": "Generate Embeddings" }]] },
+    "Generate Embeddings": { "main": [[{ "node": "Upsert to Pinecone" }]] },
+    "Upsert to Pinecone": { "main": [[{ "node": "Log to Google Sheets" }]] }
+  }
+}

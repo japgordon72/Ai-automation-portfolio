@@ -1,0 +1,88 @@
+{
+  "name": "RAG - Query & Answer Pipeline",
+  "description": "Receives user questions via webhook, embeds the query, retrieves top-K chunks from Pinecone, and returns a grounded GPT-4o answer.",
+  "version": "1.0.0",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "position": [240, 300],
+      "parameters": {
+        "path": "ask",
+        "httpMethod": "POST",
+        "responseMode": "lastNode"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Embed Question",
+      "type": "n8n-nodes-base.openAi",
+      "position": [460, 300],
+      "parameters": {
+        "operation": "embedding",
+        "model": "text-embedding-3-small",
+        "input": "={{ $json.body.question }}"
+      }
+    },
+    {
+      "id": "3",
+      "name": "Query Pinecone",
+      "type": "n8n-nodes-base.pinecone",
+      "position": [680, 300],
+      "parameters": {
+        "operation": "query",
+        "indexName": "knowledge-base",
+        "vector": "={{ $json.embedding }}",
+        "topK": 5,
+        "includeMetadata": true
+      }
+    },
+    {
+      "id": "4",
+      "name": "Build Context Block",
+      "type": "n8n-nodes-base.code",
+      "position": [900, 300],
+      "parameters": {
+        "jsCode": "const matches = $input.item.json.matches || [];\nconst question = $input.item.json.question;\nconst contextBlock = matches\n  .map((m, i) => `[Source ${i+1}: ${m.metadata.source}]\\n${m.metadata.text}`)\n  .join('\\n\\n---\\n\\n');\nconst sources = matches.map(m => `${m.metadata.source} (chunk ${m.metadata.chunk_index})`);\nreturn [{ json: { question, contextBlock, sources } }];"
+      }
+    },
+    {
+      "id": "5",
+      "name": "GPT-4o Answer",
+      "type": "n8n-nodes-base.openAi",
+      "position": [1120, 300],
+      "parameters": {
+        "operation": "message",
+        "model": "gpt-4o",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You are a precise knowledge assistant. Answer ONLY using the provided context. If the answer is not in the context, say 'I don't have information on that in the current knowledge base.' Always cite which source you used."
+          },
+          {
+            "role": "user",
+            "content": "Context:\n{{ $json.contextBlock }}\n\nQuestion: {{ $json.question }}"
+          }
+        ]
+      }
+    },
+    {
+      "id": "6",
+      "name": "Return Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "position": [1340, 300],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ answer: $json.message.content, sources: $node['Build Context Block'].json.sources, model: 'gpt-4o', timestamp: new Date().toISOString() }) }}"
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": { "main": [[{ "node": "Embed Question" }]] },
+    "Embed Question": { "main": [[{ "node": "Query Pinecone" }]] },
+    "Query Pinecone": { "main": [[{ "node": "Build Context Block" }]] },
+    "Build Context Block": { "main": [[{ "node": "GPT-4o Answer" }]] },
+    "GPT-4o Answer": { "main": [[{ "node": "Return Response" }]] }
+  }
+}
