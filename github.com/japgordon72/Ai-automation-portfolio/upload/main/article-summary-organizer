@@ -1,5 +1,0 @@
-# Article Summary Organizer
-**Problem**: Manual article processing created workflow bottlenecks  
-**Solution**: Make.com automation with Google Forms → GPT → JSON parser → smart categorization  
-**Impact**: 85% time reduction, automated summarization  
-**Tech**: Make.com, OpenAI GPT, Google Forms, Google Sheets
