@@ -1,0 +1,38 @@
+{
+  "name": "Voice AI Receptionist - FAQ Router",
+  "description": "Classifies inbound caller questions against the FAQ knowledge base and returns the appropriate response or triggers escalation.",
+  "stack": ["n8n", "OpenAI"],
+  "nodes": [
+    {
+      "name": "Receive Intent Input",
+      "type": "n8n-nodes-base.set",
+      "description": "Receives classified intent from the call handler workflow"
+    },
+    {
+      "name": "OpenAI - FAQ Lookup",
+      "type": "n8n-nodes-base.openAi",
+      "description": "Matches caller question to FAQ knowledge base and returns approved answer"
+    },
+    {
+      "name": "IF - Answer Found",
+      "type": "n8n-nodes-base.if",
+      "description": "Checks if a matching FAQ answer was found"
+    },
+    {
+      "name": "Return FAQ Answer",
+      "type": "n8n-nodes-base.set",
+      "description": "Passes the matched answer back to the call handler for voice generation"
+    },
+    {
+      "name": "Trigger Escalation",
+      "type": "n8n-nodes-base.set",
+      "description": "Flags the call for human follow-up and logs escalation reason"
+    },
+    {
+      "name": "Google Sheets - Log Escalation",
+      "type": "n8n-nodes-base.googleSheets",
+      "description": "Records escalated calls with caller info and reason for follow-up"
+    }
+  ],
+  "note": "This workflow is called by the main call handler to classify and route FAQ responses. Configure OpenAI credentials before use."
+}
