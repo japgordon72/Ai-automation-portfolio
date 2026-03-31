@@ -1,0 +1,65 @@
+{
+  "name": "Zapier Knowledge Base Chatbot",
+  "description": "A Zapier-based FAQ chatbot that uses a Google Sheets knowledge base to answer customer questions with AI.",
+  "platform": "Zapier",
+  "trigger": {
+    "app": "Zapier Chatbots",
+    "event": "New Message Received",
+    "config": {
+      "chatbot_name": "Support Assistant",
+      "welcome_message": "Hi! I'm your AI support assistant. Ask me anything about our products and services.",
+      "fallback_message": "I don't have an answer for that. Let me connect you with a human agent."
+    }
+  },
+  "steps": [
+    {
+      "step": 1,
+      "app": "Google Sheets",
+      "action": "Lookup Spreadsheet Row",
+      "config": {
+        "spreadsheet": "{{KNOWLEDGE_BASE_SHEET_ID}}",
+        "worksheet": "FAQ",
+        "lookup_column": "keyword",
+        "lookup_value": "{{message_keywords}}"
+      }
+    },
+    {
+      "step": 2,
+      "app": "OpenAI",
+      "action": "Send Prompt",
+      "config": {
+        "model": "gpt-4o",
+        "system_prompt": "You are a helpful customer support assistant. Answer the customer's question using ONLY the provided knowledge base context. If the answer is not in the context, say you don't know and offer to connect them with a human. Keep responses under 3 sentences. Be friendly and professional.",
+        "user_message": "Customer question: {{1.message}}\n\nKnowledge base context:\n{{2.answer}}\n\nAdditional context: {{2.details}}"
+      }
+    },
+    {
+      "step": 3,
+      "app": "Zapier Chatbots",
+      "action": "Send Reply",
+      "config": {
+        "message": "{{3.choices[0].message.content}}",
+        "session_id": "{{1.session_id}}"
+      }
+    },
+    {
+      "step": 4,
+      "app": "Google Sheets",
+      "action": "Create Spreadsheet Row",
+      "config": {
+        "spreadsheet": "{{LOGGING_SHEET_ID}}",
+        "worksheet": "Chat Logs",
+        "row_data": {
+          "timestamp": "{{zap_meta_human_now}}",
+          "question": "{{1.message}}",
+          "answer": "{{3.choices[0].message.content}}",
+          "session_id": "{{1.session_id}}"
+        }
+      }
+    }
+  ],
+  "knowledge_base_schema": {
+    "sheet_name": "FAQ",
+    "columns": ["keyword", "question", "answer", "details", "category", "last_updated"]
+  }
+}

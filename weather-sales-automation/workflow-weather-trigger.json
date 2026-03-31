@@ -1,0 +1,130 @@
+{
+  "name": "Weather-Triggered Sales Automation",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Daily Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 8 * * *" }] }
+      },
+      "position": [100, 300]
+    },
+    {
+      "id": "2",
+      "name": "Fetch Leads from Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "parameters": {
+        "operation": "getAll",
+        "documentId": "{{LEADS_SHEET_ID}}",
+        "sheetName": "Leads",
+        "returnAll": true
+      },
+      "position": [300, 300]
+    },
+    {
+      "id": "3",
+      "name": "Fetch Weather by City",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/weather",
+        "method": "GET",
+        "queryParameters": {
+          "parameters": [
+            { "name": "q", "value": "={{ $json.city }}" },
+            { "name": "appid", "value": "{{OPENWEATHER_API_KEY}}" },
+            { "name": "units", "value": "imperial" }
+          ]
+        }
+      },
+      "position": [500, 300]
+    },
+    {
+      "id": "4",
+      "name": "Check Weather Trigger Conditions",
+      "type": "n8n-nodes-base.if",
+      "parameters": {
+        "conditions": {
+          "number": [
+            { "value1": "={{ $json.main.temp }}", "operation": "largerEqual", "value2": 95 }
+          ]
+        }
+      },
+      "position": [700, 300]
+    },
+    {
+      "id": "5",
+      "name": "GPT-4o Generate Personalized Email",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are an expert sales copywriter. Return ONLY valid JSON: {\"subject\": \"\", \"body\": \"\", \"cta\": \"\"}"
+            },
+            {
+              "role": "user",
+              "content": "Write a personalized sales email.\nContact: {{ $('Fetch Leads from Google Sheets').item.json.first_name }} {{ $('Fetch Leads from Google Sheets').item.json.last_name }} at {{ $('Fetch Leads from Google Sheets').item.json.company }}\nCity: {{ $('Fetch Leads from Google Sheets').item.json.city }}\nCurrent Temp: {{ $json.main.temp }}\u00b0F, Condition: {{ $json.weather[0].description }}\nProduct: {{ $('Fetch Leads from Google Sheets').item.json.product_category }}\nTone: professional. CTA: Book a free consultation."
+            }
+          ]
+        }
+      },
+      "position": [900, 200]
+    },
+    {
+      "id": "6",
+      "name": "Parse Email JSON",
+      "type": "n8n-nodes-base.code",
+      "parameters": {
+        "jsCode": "const raw = $input.item.json.message.content;\nreturn [{ json: JSON.parse(raw) }];"
+      },
+      "position": [1100, 200]
+    },
+    {
+      "id": "7",
+      "name": "Send Email via Gmail",
+      "type": "n8n-nodes-base.gmail",
+      "parameters": {
+        "operation": "send",
+        "toEmail": "={{ $('Fetch Leads from Google Sheets').item.json.email }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}"
+      },
+      "position": [1300, 200]
+    },
+    {
+      "id": "8",
+      "name": "Log Outreach to Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "parameters": {
+        "operation": "append",
+        "documentId": "{{LEADS_SHEET_ID}}",
+        "sheetName": "Outreach Log",
+        "columns": { "mappingMode": "autoMapInputData" }
+      },
+      "position": [1300, 400]
+    }
+  ],
+  "connections": {
+    "Daily Schedule Trigger": { "main": [[{ "node": "Fetch Leads from Google Sheets", "type": "main", "index": 0 }]] },
+    "Fetch Leads from Google Sheets": { "main": [[{ "node": "Fetch Weather by City", "type": "main", "index": 0 }]] },
+    "Fetch Weather by City": { "main": [[{ "node": "Check Weather Trigger Conditions", "type": "main", "index": 0 }]] },
+    "Check Weather Trigger Conditions": {
+      "main": [
+        [{ "node": "GPT-4o Generate Personalized Email", "type": "main", "index": 0 }],
+        [{ "node": "Log Outreach to Sheets", "type": "main", "index": 0 }]
+      ]
+    },
+    "GPT-4o Generate Personalized Email": { "main": [[{ "node": "Parse Email JSON", "type": "main", "index": 0 }]] },
+    "Parse Email JSON": {
+      "main": [
+        [{ "node": "Send Email via Gmail", "type": "main", "index": 0 }],
+        [{ "node": "Log Outreach to Sheets", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

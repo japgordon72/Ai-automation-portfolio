@@ -1,0 +1,86 @@
+{
+  "name": "Article Summary Organizer",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "parameters": {
+        "rule": { "interval": [{ "field": "hours", "minutesInterval": 6 }] }
+      },
+      "position": [100, 300]
+    },
+    {
+      "id": "2",
+      "name": "Fetch RSS Feed",
+      "type": "n8n-nodes-base.rssFeedRead",
+      "parameters": {
+        "url": "{{RSS_FEED_URL}}"
+      },
+      "position": [300, 300]
+    },
+    {
+      "id": "3",
+      "name": "Fetch Article Body",
+      "type": "n8n-nodes-base.httpRequest",
+      "parameters": {
+        "url": "={{ $json.link }}",
+        "method": "GET",
+        "responseFormat": "text"
+      },
+      "position": [500, 300]
+    },
+    {
+      "id": "4",
+      "name": "GPT-4o Summarize",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a research summarizer. Return ONLY valid JSON in this format: {\"title\": \"\", \"summary\": \"\", \"key_takeaways\": [\"\", \"\", \"\"], \"category\": \"\", \"source\": \"\"}"
+            },
+            {
+              "role": "user",
+              "content": "Summarize this article. Title: {{ $json.title }}\nContent: {{ $json.content.substring(0, 4000) }}"
+            }
+          ]
+        }
+      },
+      "position": [700, 300]
+    },
+    {
+      "id": "5",
+      "name": "Parse JSON Output",
+      "type": "n8n-nodes-base.code",
+      "parameters": {
+        "jsCode": "const raw = $input.item.json.message.content;\nconst parsed = JSON.parse(raw);\nreturn [{ json: { ...parsed, processed_at: new Date().toISOString() } }];"
+      },
+      "position": [900, 300]
+    },
+    {
+      "id": "6",
+      "name": "Append to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "parameters": {
+        "operation": "append",
+        "documentId": "{{GOOGLE_SHEET_ID}}",
+        "sheetName": "Summaries",
+        "columns": {
+          "mappingMode": "autoMapInputData"
+        }
+      },
+      "position": [1100, 300]
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": { "main": [[{ "node": "Fetch RSS Feed", "type": "main", "index": 0 }]] },
+    "Fetch RSS Feed": { "main": [[{ "node": "Fetch Article Body", "type": "main", "index": 0 }]] },
+    "Fetch Article Body": { "main": [[{ "node": "GPT-4o Summarize", "type": "main", "index": 0 }]] },
+    "GPT-4o Summarize": { "main": [[{ "node": "Parse JSON Output", "type": "main", "index": 0 }]] },
+    "Parse JSON Output": { "main": [[{ "node": "Append to Google Sheets", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

@@ -1,0 +1,99 @@
+{
+  "name": "Customer Feedback Analysis Pipeline",
+  "nodes": [
+    {
+      "id": "1",
+      "name": "Google Forms Trigger",
+      "type": "n8n-nodes-base.googleFormsTrigger",
+      "parameters": {
+        "formId": "{{GOOGLE_FORM_ID}}",
+        "event": "formResponseReceived"
+      },
+      "position": [100, 300]
+    },
+    {
+      "id": "2",
+      "name": "GPT-4o Sentiment Analysis",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "parameters": {
+        "model": "gpt-4o",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a sentiment analysis engine. Return ONLY valid JSON: {\"sentiment\": \"\", \"confidence\": 0.0, \"tags\": [], \"summary\": \"\", \"priority\": \"low|medium|high\"}"
+            },
+            {
+              "role": "user",
+              "content": "Analyze this customer feedback: \"{{ $json['What is your feedback?'] }}\""
+            }
+          ]
+        }
+      },
+      "position": [300, 300]
+    },
+    {
+      "id": "3",
+      "name": "Parse Sentiment JSON",
+      "type": "n8n-nodes-base.code",
+      "parameters": {
+        "jsCode": "const raw = $input.item.json.message.content;\nconst parsed = JSON.parse(raw);\nreturn [{ json: { ...parsed, submitted_at: new Date().toISOString(), raw_feedback: $input.item.json['What is your feedback?'] } }];"
+      },
+      "position": [500, 300]
+    },
+    {
+      "id": "4",
+      "name": "Route by Sentiment",
+      "type": "n8n-nodes-base.switch",
+      "parameters": {
+        "mode": "expression",
+        "rules": {
+          "values": [
+            { "conditions": { "string": [{ "value1": "={{ $json.sentiment }}", "operation": "equal", "value2": "negative" }] } },
+            { "conditions": { "string": [{ "value1": "={{ $json.sentiment }}", "operation": "equal", "value2": "neutral" }] } },
+            { "conditions": { "string": [{ "value1": "={{ $json.sentiment }}", "operation": "equal", "value2": "positive" }] } }
+          ]
+        }
+      },
+      "position": [700, 300]
+    },
+    {
+      "id": "5",
+      "name": "Send Negative Alert Email",
+      "type": "n8n-nodes-base.gmail",
+      "parameters": {
+        "operation": "send",
+        "toEmail": "{{ALERT_EMAIL}}",
+        "subject": "🚨 Negative Feedback Alert — Action Required",
+        "emailType": "html",
+        "message": "<h3>Negative Feedback Received</h3><p><strong>Summary:</strong> {{ $json.summary }}</p><p><strong>Tags:</strong> {{ $json.tags.join(', ') }}</p><p><strong>Priority:</strong> {{ $json.priority }}</p><p><strong>Raw Feedback:</strong> {{ $json.raw_feedback }}</p>"
+      },
+      "position": [900, 200]
+    },
+    {
+      "id": "6",
+      "name": "Log to Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "parameters": {
+        "operation": "append",
+        "documentId": "{{GOOGLE_SHEET_ID}}",
+        "sheetName": "Feedback Log",
+        "columns": { "mappingMode": "autoMapInputData" }
+      },
+      "position": [900, 400]
+    }
+  ],
+  "connections": {
+    "Google Forms Trigger": { "main": [[{ "node": "GPT-4o Sentiment Analysis", "type": "main", "index": 0 }]] },
+    "GPT-4o Sentiment Analysis": { "main": [[{ "node": "Parse Sentiment JSON", "type": "main", "index": 0 }]] },
+    "Parse Sentiment JSON": { "main": [[{ "node": "Route by Sentiment", "type": "main", "index": 0 }]] },
+    "Route by Sentiment": {
+      "main": [
+        [{ "node": "Send Negative Alert Email", "type": "main", "index": 0 }],
+        [{ "node": "Log to Google Sheets", "type": "main", "index": 0 }],
+        [{ "node": "Log to Google Sheets", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}
