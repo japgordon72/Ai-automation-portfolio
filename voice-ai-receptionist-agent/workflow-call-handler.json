@@ -1,0 +1,44 @@
+{
+  "name": "Voice AI Receptionist - Call Handler",
+  "description": "Handles inbound Twilio calls, detects caller intent using OpenAI, generates voice response via ElevenLabs, and logs call data to Google Sheets.",
+  "stack": ["n8n", "Twilio", "OpenAI", "ElevenLabs", "Google Sheets"],
+  "trigger": "Webhook - Twilio inbound call POST",
+  "nodes": [
+    {
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "description": "Receives inbound call data from Twilio voice webhook"
+    },
+    {
+      "name": "Extract Caller Input",
+      "type": "n8n-nodes-base.set",
+      "description": "Parses caller speech input or DTMF from Twilio payload"
+    },
+    {
+      "name": "OpenAI - Intent Detection",
+      "type": "n8n-nodes-base.openAi",
+      "description": "Classifies caller intent and generates a response from the FAQ knowledge base"
+    },
+    {
+      "name": "IF - FAQ Match or Escalate",
+      "type": "n8n-nodes-base.if",
+      "description": "Routes to FAQ response or escalation path based on intent classification"
+    },
+    {
+      "name": "ElevenLabs - Voice Generation",
+      "type": "n8n-nodes-base.httpRequest",
+      "description": "Converts OpenAI text response to natural-sounding audio via ElevenLabs API"
+    },
+    {
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "description": "Returns TwiML XML response to Twilio to deliver voice audio to caller"
+    },
+    {
+      "name": "Google Sheets - Log Call",
+      "type": "n8n-nodes-base.googleSheets",
+      "description": "Logs call timestamp, caller number, intent, response, and outcome"
+    }
+  ],
+  "note": "Import this file into n8n and configure credentials for Twilio, OpenAI, ElevenLabs, and Google Sheets before activating."
+}
