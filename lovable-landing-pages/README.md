@@ -1,53 +1,50 @@
-# Lovable Landing Pages
+# 🌐 Local Service Landing Pages
 
-**Problem:** Businesses building automation tools and services need professional landing pages fast — without hiring a developer or waiting weeks for delivery.
-
-**Solution:** AI-generated, production-ready landing pages built in Lovable.dev using precision prompt engineering. Pages are deployed as React + Tailwind CSS apps in minutes, covering SaaS tools, service businesses, lead capture pages, and personal portfolios.
-
-**Impact:** 90% faster page creation versus traditional development; no-code deployment ready for client demos and MVP launches.
-
-**Tech Stack:** Lovable.dev · React · Tailwind CSS · AI Prompt Engineering
+**Type:** No-Code AI Web Development  
+**Tools:** Lovable.dev · No-Code Builder  
+**Program:** TripleTen AI Automation Specialist
 
 ---
 
-## 🚀 Live Deployments
+## 📋 Project Overview
 
-| Page | URL | Type |
-|---|---|---|
-| Tranquil Template Forge | [tranquil-template-forge.lovable.app](https://tranquil-template-forge.lovable.app) | AI Tool / SaaS |
-| Spotless Leads Pro | [spotless-leads-pro.lovable.app](https://spotless-leads-pro.lovable.app) | Service Business / Lead Capture |
+Two professional service landing pages built entirely using Lovable.dev — an AI-powered no-code web builder. Demonstrates the ability to rapidly deploy client-ready web pages for local service businesses without writing code.
 
 ---
 
-## What's In This Project
+## 🔗 Live Deployments
 
-| File | Description |
-|---|---|
-| `prompts/landing-page-prompts.md` | 4 reusable Lovable.dev prompt templates |
-| `Sprint 4 project.docx` | Sprint project documentation |
-
----
-
-## Page Types Built
-
-- **AI Tool / SaaS** — hero, features, pricing, testimonials, CTA
-- **Service Business** — trust badges, services grid, contact form, map
-- **Lead Capture / Waitlist** — minimal single-column, email capture
-- **Personal Portfolio** — skills, projects, about, contact
+| Page | Live URL |
+|------|----------|
+| Template Forge | [tranquil-template-forge.lovable.app](https://tranquil-template-forge.lovable.app) |
+| Spotless Leads Pro | [spotless-leads-pro.lovable.app](https://spotless-leads-pro.lovable.app) |
 
 ---
 
-## How to Use the Prompts
+## ⚙️ How They Were Built
 
-1. Open [Lovable.dev](https://lovable.dev)
-2. Copy a prompt from `prompts/landing-page-prompts.md`
-3. Replace all `[BRACKETED]` values with your client/project specifics
-4. Paste into Lovable's prompt field and generate
-5. Iterate with follow-up prompts for style refinements
-6. Deploy directly from Lovable or export to Netlify/Vercel
+1. Defined the service business type and target audience
+2. Used **Lovable.dev** AI prompts to generate full page layouts
+3. Customized copy, colors, and calls-to-action
+4. Deployed live via Lovable's hosting — no code written
 
 ---
 
-## Prompt Tips
+## 🛠️ Tech Stack
 
-See [`prompts/landing-page-prompts.md`](./prompts/landing-page-prompts.md) for full templates and prompting best practices.
+| Tool | Role |
+|------|------|
+| Lovable.dev | AI no-code page builder + hosting |
+| AI Prompting | Page design and content generation |
+
+---
+
+## 💡 Use Case
+
+These pages demonstrate how local service businesses (cleaning, landscaping, contracting, etc.) can get a professional web presence built in under an hour using AI tools — a core automation specialist skill.
+
+---
+
+## 🗂️ Files
+
+- `README.md` — This file
