@@ -1,47 +1,56 @@
 # 🧾 UiPath Invoice RPA
 
-**Type:** Robotic Process Automation (RPA)  
-**Tools:** UiPath · Document Understanding · GenAI Activity  
-**Program:** TripleTen AI Automation Specialist
+**Type:** Robotic Process Automation + AI Document Understanding  
+**Tools:** UiPath · Document Understanding · Generative AI
 
 ---
 
-## 📋 Project Overview
+## Overview
 
-An RPA bot built in UiPath that automates invoice processing end-to-end — extracting data using Document Understanding, generating AI-written purchase descriptions via GenAI activity, and filtering invoices by due date for priority processing.
-
----
-
-## ⚙️ How It Works
-
-1. **UiPath bot** opens and reads incoming invoice files
-2. **Document Understanding** extracts structured fields (vendor, amount, date, line items)
-3. **GenAI Activity** generates a plain-English purchase description for each line item
-4. Bot **filters by due date** — flags invoices due within 7 days
-5. Results written to output file / system
+Automated invoice processing robot that extracts structured data from invoice documents using UiPath Document Understanding, then generates AI-powered purchase descriptions — eliminating manual data entry.
 
 ---
 
-## 🛠️ Tech Stack
+## Workflow
+
+```
+Invoice Document (PDF/Image)
+        ↓
+  UiPath Robot
+        ↓
+  Document Understanding (extract fields)
+        ↓
+  Generative AI (generate purchase description)
+        ↓
+  Structured Output / System Entry
+```
+
+---
+
+## Extracted Fields
+
+| Field | Method |
+|-------|--------|
+| Vendor name | Document Understanding ML model |
+| Invoice number | Document Understanding ML model |
+| Line items | Document Understanding ML model |
+| Purchase description | AI-generated from extracted data |
+| Total amount | Document Understanding ML model |
+
+---
+
+## Key Capability
+
+The AI-generated purchase description converts raw line items into human-readable business context — a step that previously required manual review.
+
+---
+
+## Tech Stack
 
 | Tool | Role |
 |------|------|
-| UiPath Studio | RPA bot development |
-| Document Understanding | AI-powered data extraction |
-| GenAI Activity | Purchase description generation |
-| Excel / Output File | Results storage |
+| UiPath Studio | Robot design + orchestration |
+| Document Understanding | ML-based invoice field extraction |
+| Generative AI Activity | AI description generation |
 
----
-
-## 🔑 Key Features
-
-- ✅ Fully automated — zero manual data entry
-- ✅ AI-generated purchase descriptions for every line item
-- ✅ Due-date filtering for priority queue management
-- ✅ Handles multiple invoice formats
-
----
-
-## 🗂️ Files
-
-- `README.md` — This file
+**Built by Japheth Gordon — TripleTen AI Automation Specialist**
