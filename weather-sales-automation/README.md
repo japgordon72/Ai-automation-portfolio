@@ -1,47 +1,53 @@
-# ⛅ Weather Sales Automation
+# ⛅ Weather-Triggered Sales Automation
 
-**Type:** Trigger-Based Email Automation  
-**Tools:** Zapier · OpenWeatherMap API · Gmail  
-**Business Context:** Bayside Brews & Scoops — Coffee & Ice Cream Kiosk, Miami FL
-
----
-
-## 📋 Project Overview
-
-A weather-triggered sales automation that pulls daily weather data from OpenWeatherMap, generates AI-powered sales and staffing recommendations, and sends personalized Gmail notifications — helping a beachside kiosk prepare for the day ahead.
+**Type:** Event-Driven Sales Outreach  
+**Tools:** Zapier · OpenWeatherMap · Gmail · OpenAI
 
 ---
 
-## ⚙️ How It Works
+## Overview
 
-1. **Zapier** runs on a daily schedule
-2. **OpenWeatherMap API** returns current weather for Miami, FL
-3. AI generates personalized sales recommendations based on conditions
-4. **Gmail** sends the daily briefing automatically
+Monitors real-time weather conditions for a target location and automatically sends personalized sales outreach emails when weather triggers are met — no manual intervention required.
 
 ---
 
-## 🌤️ Trigger Logic
+## Workflow
 
-| Weather Condition | Recommendation Sent |
-|---|---|
-| Sunny + Hot (85°F+) | Push ice cream specials, increase staff |
-| Overcast / Mild | Promote hot coffee drinks, normal staff |
-| Rain | Reduced hours advisory, shelter specials |
+```
+OpenWeatherMap API (scheduled check)
+        ↓
+    Zapier
+        ↓
+  Weather Condition Check
+      ├─ [Trigger met]  → OpenAI (personalize email) → Gmail (send)
+      └─ [No trigger]   → Stop
+```
 
 ---
 
-## 🛠️ Tech Stack
+## Trigger Logic
+
+| Condition | Action |
+|-----------|--------|
+| Rain / Storm | Send rain-gear promo email |
+| Heat > 90°F | Send cooling product outreach |
+| No trigger | Workflow ends silently |
+
+---
+
+## Why This Matters
+
+Timing sales outreach to real-world conditions increases open rates and relevance. This workflow demonstrates event-driven automation — a core pattern in enterprise sales tools.
+
+---
+
+## Tech Stack
 
 | Tool | Role |
 |------|------|
-| Zapier | Workflow orchestration + scheduling |
-| OpenWeatherMap API | Real-time weather data |
-| AI (LLM) | Sales copy generation |
-| Gmail | Automated daily briefing delivery |
+| OpenWeatherMap | Real-time weather data |
+| Zapier | Workflow orchestration |
+| OpenAI | Personalized email copy |
+| Gmail | Automated delivery |
 
----
-
-## 🗂️ Files
-
-- `README.md` — This file
+**Built by Japheth Gordon — TripleTen AI Automation Specialist**
