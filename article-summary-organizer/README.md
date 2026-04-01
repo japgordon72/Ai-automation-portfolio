@@ -7,7 +7,7 @@
 Google Form → OpenAI → Structured JSON → Gmail
 ```
 
-![Workflow](Screenshot-2026-04-01-081926.jpg)
+![Workflow](./assets/workflow.jpg)
 
 ## JSON Output
 ```json
