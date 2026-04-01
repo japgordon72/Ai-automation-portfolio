@@ -18,4 +18,13 @@ AI Automation Specialist | San Diego, CA | Open to Entry-Level Roles
 
 **Tools:** Make · Zapier · UiPath · n8n · OpenAI · Gemini · Lovable.dev
 
-**Contact:** San Diego, CA | [GitHub](https://github.com/japgordon72)
+---
+
+## 📬 Contact
+
+| | |
+|---|---|
+| 📧 Email | [japgordon@gmail.com](mailto:japgordon@gmail.com) |
+| 💼 LinkedIn | [linkedin.com/in/japheth-gordon](https://www.linkedin.com/in/japheth-gordon/) |
+| 🐙 GitHub | [github.com/japgordon72](https://github.com/japgordon72) |
+| 📍 Location | San Diego, CA |
