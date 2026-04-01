@@ -1,116 +1,45 @@
-# Japheth Gordon — AI Automation Portfolio
+# 🤖 Japheth Gordon — AI Automation Portfolio
 
-> **AI Automation Specialist** | San Diego, CA  
-> Open to roles: $75K–$85K | Remote / Hybrid / On-site  
-> Stack: n8n · Make.com · Zapier · UiPath · OpenAI · ElevenLabs · Twilio · Google Sheets · Lovable.dev
+> AI Automation Specialist | TripleTen Bootcamp | San Diego, CA
+> Open to Entry-Level AI Automation Roles
 
 ---
 
 ## 👋 About Me
 
-I'm an AI Automation Specialist based in San Diego, CA, trained through the **TripleTen AI Automation Bootcamp (2026)**. I design, build, and deploy intelligent automation workflows that eliminate manual work, reduce costs, and scale business operations. My projects integrate large language models, RPA bots, voice AI, and no-code/low-code platforms to deliver real business outcomes.
+I'm Japheth Gordon, an AI Automation Specialist trained through the TripleTen AI Automation program. I build intelligent workflows that eliminate manual processes, reduce costs, and scale operations using AI tools, no-code platforms, and LLM integrations.
 
-I'm actively seeking entry-level to mid-level AI Automation roles where I can bring immediate value through hands-on workflow architecture, LLM integration, and process optimization.
-
----
-
-## 🛠️ Tech Stack
-
-| Category | Tools |
-|---|---|
-| Workflow Automation | n8n, Make.com, Zapier |
-| RPA | UiPath |
-| AI / LLMs | OpenAI (GPT-4o), Prompt Engineering, RAG |
-| Voice AI | ElevenLabs, Twilio |
-| Frontend / UI | Lovable.dev |
-| Data | Google Sheets, Webhooks, REST APIs |
+**Tools I work with:** Make.com · Zapier · UiPath · n8n · OpenAI · Google Gemini · Claude · Perplexity · Lovable.dev · Google Workspace
 
 ---
 
-## 📁 Projects
+## 🗂️ Projects
 
-### 1. 🤖 [Voice AI Receptionist Agent](./voice-ai-receptionist-agent)
-**Stack:** Twilio · ElevenLabs · OpenAI · n8n  
-An automated voice receptionist that answers inbound calls, qualifies leads, books appointments, and sends SMS follow-ups — all without human intervention.  
-**Impact:** Replaces 15–20 hrs/week of manual phone handling for small businesses.
-
----
-
-### 2. 🧠 [RAG Knowledge Agent](./rag-knowledge-agent)
-**Stack:** OpenAI · n8n · Google Sheets  
-A retrieval-augmented generation (RAG) agent that ingests custom knowledge bases and answers domain-specific questions with cited sources.  
-**Impact:** Reduces internal support ticket volume by enabling instant, accurate self-service Q&A.
-
----
-
-### 3. 📊 [Customer Feedback Analysis Pipeline](./feedback-analysis)
-**Stack:** Make.com · OpenAI · Google Sheets  
-Automatically collects customer feedback from multiple channels, runs GPT-4o sentiment analysis, tags themes, and routes critical issues to the right team via Slack/email.  
-**Impact:** Turns hours of manual review into a real-time, always-on insight engine.
+| # | Project | Tools | Description |
+|---|---------|-------|-------------|
+| 1 | [AI Customer Support Solution](./prompt-engineering-framework/) | Prompt Engineering · Google Slides | 5-step framework analyzing 50 real complaints + AI workflow redesign |
+| 2 | [Article Summary Organizer](./article-summary-organizer/) | Make.com · OpenAI · Google Forms · Gmail | Auto-summarizes articles into structured JSON + emails results |
+| 3 | [Feedback Analysis Pipeline](./feedback-analysis/) | Make.com · Google Gemini · JSON | Sentiment analysis pipeline with structured AI output |
+| 4 | [Weather Sales Automation](./weather-sales-automation/) | Zapier · OpenWeatherMap · Gmail | Weather-triggered personalized email outreach for sales |
+| 5 | [Zapier Hotel Knowledge Chatbot](./zapier-knowledge-chatbot/) | Zapier · PDF Knowledge Base | PDF-powered chatbot with professional fallback handling |
+| 6 | [UiPath Invoice RPA](./uipath-invoice-rpa/) | UiPath · Document Understanding · GenAI | Invoice processing with AI-generated purchase descriptions |
+| 7 | [RAG Knowledge Agent](./rag-knowledge-agent/) | n8n · RAG · LLM | Retrieval-augmented generation agent for knowledge queries |
+| 8 | [Voice AI Receptionist](./voice-ai-receptionist-agent/) | Voice AI · LLM · Call Flow | Automated voice receptionist with FAQ handling |
+| 9 | [Local Service Landing Pages](./lovable-landing-pages/) | Lovable.dev · No-Code | AI-built service landing pages with live deployments |
 
 ---
 
-### 4. 🌤️ [Weather-Triggered Sales Automation](./weather-sales-automation)
-**Stack:** Make.com · OpenAI · Twilio · Google Sheets  
-Monitors weather APIs and triggers personalized SMS/email outreach campaigns to prospects when weather conditions match predefined sales triggers (e.g., heatwaves → HVAC offers).  
-**Impact:** Delivers hyper-contextual outreach automatically, increasing conversion relevance.
+## 📊 Portfolio Stats
 
----
-
-### 5. 📰 [Article Summary Organizer](./article-summary-organizer)
-**Stack:** n8n · OpenAI · Google Sheets  
-Monitors RSS feeds and URLs, auto-summarizes articles using GPT-4o, categorizes by topic, and organizes summaries into a searchable Google Sheets knowledge base.  
-**Impact:** Saves 5–10 hrs/week of manual research and reading for content teams.
-
----
-
-### 6. 💬 [Zapier Knowledge Chatbot](./zapier-knowledge-chatbot)
-**Stack:** Zapier · OpenAI · Google Sheets  
-A no-code chatbot that uses a Google Sheets knowledge base as its data source and answers customer or team questions via a chat interface, built entirely in Zapier.  
-**Impact:** Enables non-technical teams to deploy AI Q&A systems with zero code.
-
----
-
-### 7. 🧾 [UiPath Invoice RPA Bot](./uipath-invoice-rpa)
-**Stack:** UiPath · Google Sheets  
-An RPA bot that extracts data from PDF invoices, validates line items, enters data into accounting systems, and flags anomalies for human review.  
-**Impact:** Reduces invoice processing time by ~80%, eliminating manual data entry errors.
-
----
-
-### 8. 🎨 [Lovable Landing Pages](./lovable-landing-pages)
-**Stack:** Lovable.dev  
-AI-generated, production-ready landing pages for automation-powered business tools — built rapidly using Lovable.dev for client demos and MVP launches.  
-**Impact:** Demonstrates full-stack delivery capability from automation backend to polished UI.
-
----
-
-### 9. 📐 [Prompt Engineering Framework](./prompt-engineering-framework)
-**Stack:** OpenAI  
-A structured library of reusable prompt templates for business automation tasks — including classification, summarization, extraction, and agent instruction sets.  
-**Impact:** Accelerates LLM integration across projects by providing battle-tested, modular prompts.
-
----
-
-## 📈 Portfolio Impact Summary
-
-| Metric | Result |
-|---|---|
-| Total Projects | 9 |
-| Estimated Hours Automated / Week | 100+ |
-| Platforms Mastered | 9 |
-| AI Models Integrated | OpenAI GPT-4o, ElevenLabs |
-| RPA Tools | UiPath |
+- **9 Projects** built end-to-end
+- **4 Automation Platforms** — Make, Zapier, UiPath, n8n
+- **3 LLM Integrations** — OpenAI, Gemini, Claude
+- **2 Live Deployments** — Lovable.dev
 
 ---
 
 ## 📬 Contact
 
-- 📍 San Diego, CA
-- 💼 Open to: AI Automation Specialist, Automation Engineer, AI Ops, No-Code Developer
-- 🎯 Target: $75K–$85K
-- 🔗 GitHub: [github.com/japgordon72](https://github.com/japgordon72)
-
----
-
-*Built with discipline, powered by AI, driven by purpose.* 🚀
+- **GitHub:** github.com/japgordon72
+- **Location:** San Diego, CA
+- **Status:** Open to Entry-Level AI Automation Roles
