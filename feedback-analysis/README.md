@@ -1,22 +1,52 @@
 # 📊 Feedback Analysis Pipeline
 
-**Automated sentiment analysis → structured JSON output**
+**Type:** AI Sentiment Analysis Automation  
+**Tools:** Make.com · Google Gemini · JSON Parsing
+
+---
+
+## Overview
+
+Automated pipeline that receives raw customer feedback, sends it to Google Gemini for structured sentiment analysis, and outputs categorized JSON — ready for dashboards or reporting.
+
+---
 
 ## Workflow
+
 ```
-Google Forms → Make.com → Google Gemini → JSON Output
+Customer Feedback Input
+        ↓
+    Make.com
+        ↓
+  Google Gemini AI
+        ↓
+  Structured JSON Output
+        ↓
+  Storage / Notification
 ```
 
-![Workflow](Screenshot-2026-04-01-073418.jpg)
+---
 
-## Output Structure
+## JSON Output Structure
+
 ```json
 {
-  "sentiment": "positive|neutral|negative",
+  "sentiment": "positive | neutral | negative",
   "confidence": 0.92,
-  "themes": ["theme1", "theme2"],
-  "summary": "One sentence summary"
+  "key_themes": ["theme 1", "theme 2"],
+  "summary": "One sentence summary",
+  "recommended_action": "Follow up / Escalate / Archive"
 }
 ```
 
-**Tech:** Make.com · Google Gemini · JSON Parsing
+---
+
+## Tech Stack
+
+| Tool | Role |
+|------|------|
+| Make.com | Workflow orchestration |
+| Google Gemini | Sentiment + theme analysis |
+| JSON Parser | Structured output formatting |
+
+**Built by Japheth Gordon — TripleTen AI Automation Specialist**
