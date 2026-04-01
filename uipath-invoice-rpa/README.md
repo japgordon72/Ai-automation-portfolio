@@ -1,46 +1,47 @@
-# Automated Invoice Reporting with UiPath RPA
+# 🧾 UiPath Invoice RPA
 
-**Problem:** Manual invoice processing is slow, error-prone, and creates costly delays in accounts payable workflows — especially at volume.
-
-**Solution:** A UiPath RPA bot that monitors a Google Drive folder for new PDF invoices, uses Document Understanding to extract structured data, validates the numbers, writes results to a Google Sheets accounting log, and sends email alerts for anomalies — all without human intervention.
-
-**Impact:** ~90% reduction in invoice processing time; zero manual data entry errors.
-
-**Tech Stack:** UiPath Studio · UiPath Document Understanding · Google Drive · Google Sheets · Gmail
+**Type:** Robotic Process Automation (RPA)  
+**Tools:** UiPath · Document Understanding · GenAI Activity  
+**Program:** TripleTen AI Automation Specialist
 
 ---
 
-## Workflow Architecture
+## 📋 Project Overview
 
-```
-Google Drive: New PDF detected
-  → UiPath: download to temp folder
-  → Document Understanding: OCR + extract structured fields
-  → Validation Rules: check totals, due dates, approval thresholds
-      → flagged  → Gmail alert to manager
-      → clean    → Append to Google Sheets log
-  → Archive PDF to /Processed folder
-```
+An RPA bot built in UiPath that automates invoice processing end-to-end — extracting data using Document Understanding, generating AI-written purchase descriptions via GenAI activity, and filtering invoices by due date for priority processing.
 
-## Files
+---
 
-| File | Description |
-|---|---|
-| `workflow-invoice-bot.md` | Full process flow + activities documentation |
-| `Japheth Gordon Automation of Invoice Reporting with UiPath.pptx` | Sprint presentation deck |
+## ⚙️ How It Works
 
-## Key Features
+1. **UiPath bot** opens and reads incoming invoice files
+2. **Document Understanding** extracts structured fields (vendor, amount, date, line items)
+3. **GenAI Activity** generates a plain-English purchase description for each line item
+4. Bot **filters by due date** — flags invoices due within 7 days
+5. Results written to output file / system
 
-- Handles multi-page PDF invoices via OCR + Document Understanding
-- Auto-flags invoices over $10K for manager approval
-- Detects calculation errors (subtotal + tax ≠ total)
-- Urgent payment alerts when due date is within 3 days
-- Full audit trail in Google Sheets
+---
 
-## Setup
+## 🛠️ Tech Stack
 
-See [`workflow-invoice-bot.md`](./workflow-invoice-bot.md) for the complete process documentation, UiPath activity list, and Google Sheets schema.
+| Tool | Role |
+|------|------|
+| UiPath Studio | RPA bot development |
+| Document Understanding | AI-powered data extraction |
+| GenAI Activity | Purchase description generation |
+| Excel / Output File | Results storage |
 
-## Prompt Used for Data Extraction
+---
 
-See [`../prompt-engineering-framework/prompts/03-data-extraction.md`](../prompt-engineering-framework/prompts/03-data-extraction.md) for the GPT-4o extraction prompt template used alongside Document Understanding.
+## 🔑 Key Features
+
+- ✅ Fully automated — zero manual data entry
+- ✅ AI-generated purchase descriptions for every line item
+- ✅ Due-date filtering for priority queue management
+- ✅ Handles multiple invoice formats
+
+---
+
+## 🗂️ Files
+
+- `README.md` — This file
