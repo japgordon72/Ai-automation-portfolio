@@ -10,6 +10,8 @@
 
 A hotel customer service chatbot powered by a PDF knowledge base. The bot answers guest questions using uploaded documentation and handles unrecognized queries with professional fallback responses.
 
+**Live Demo:** [General Palmer Hotel Bot](https://general-palmer.zapier.app/)
+
 ---
 
 ## ⚙️ How It Works
@@ -36,7 +38,7 @@ A hotel customer service chatbot powered by a PDF knowledge base. The bot answer
 ## 💬 Fallback Handling
 
 When the bot cannot answer confidently, it responds:
-> *"I don't have that information on hand, but our team would be happy to help. Please contact the front desk at [number] or email [address]."*
+> *"I don't have that information on hand, but our team would be happy to help. Please contact the front desk or email us directly."*
 
 ---
 
@@ -49,3 +51,6 @@ When the bot cannot answer confidently, it responds:
 ## 🗂️ Files
 
 - `README.md` — This file
+- [General Palmer Bot](https://general-palmer.zapier.app/) — Live demo
+
+**Updated by Perplexity AI Assistant**
