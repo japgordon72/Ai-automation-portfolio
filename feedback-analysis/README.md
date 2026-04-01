@@ -1,43 +1,52 @@
-# Automated Customer Feedback Analysis Pipeline
+# 📊 Feedback Analysis Pipeline
 
-**Problem:** Manual review of customer feedback delayed issue detection and response times, letting critical complaints go unaddressed for hours or days.
-
-**Solution:** A Make.com/n8n pipeline that triggers on new Google Form submissions, runs GPT-4o sentiment analysis, classifies urgency, routes negative feedback via instant email alert, and logs all results to a tagged Google Sheets dashboard.
-
-**Impact:** 85% faster feedback analysis; instant negative feedback alerts eliminate response lag.
-
-**Tech Stack:** n8n · OpenAI GPT-4o · Google Forms · Google Sheets · Gmail
+**Type:** AI Sentiment Analysis Automation  
+**Tools:** Make.com · Google Gemini AI · JSON Parsing  
+**Program:** TripleTen AI Automation Specialist
 
 ---
 
-## Workflow Architecture
+## 📋 Project Overview
 
+An automated feedback analysis pipeline that receives customer feedback, sends it to Google Gemini for structured sentiment analysis, and outputs categorized JSON results — ready for dashboards or reporting.
+
+> ⚠️ **Important:** This project uses **Google Gemini AI**, not OpenAI/ChatGPT.
+
+---
+
+## ⚙️ How It Works
+
+1. Feedback is submitted or ingested into the pipeline
+2. **Make.com** passes feedback content to **Google Gemini**
+3. Gemini returns structured JSON with sentiment classification
+4. Output is parsed and routed for storage or notification
+
+---
+
+## 🧠 AI Output Structure
+
+```json
+{
+  "sentiment": "positive | neutral | negative",
+  "confidence": 0.92,
+  "key_themes": ["theme 1", "theme 2"],
+  "summary": "One-sentence summary",
+  "recommended_action": "Follow up / Escalate / Archive"
+}
 ```
-Google Forms Submission (trigger)
-  → GPT-4o: sentiment + tags + priority (JSON)
-  → Code Node: parse & enrich
-  → Switch Node: route by sentiment
-      → negative  → Gmail alert to team
-      → neutral   → Log to Sheets
-      → positive  → Log to Sheets
-```
 
-## Files
+---
 
-| File | Description |
-|---|---|
-| `workflow-feedback-pipeline.json` | Importable n8n workflow |
-| `Sprint 3 Japheth Gordon Automated Feedback Analysis Workflow.pptx` | Sprint presentation deck |
+## 🛠️ Tech Stack
 
-## Setup
+| Tool | Role |
+|------|------|
+| Make.com | Workflow orchestration |
+| Google Gemini AI | Sentiment + theme analysis |
+| JSON Parser | Structured output handling |
 
-1. Import `workflow-feedback-pipeline.json` into n8n
-2. Set credentials: OpenAI API key, Google OAuth (Forms + Sheets + Gmail)
-3. Replace `{{GOOGLE_FORM_ID}}` with your Form ID
-4. Replace `{{GOOGLE_SHEET_ID}}` with your Sheet ID
-5. Replace `{{ALERT_EMAIL}}` with your notification email
-6. Activate workflow
+---
 
-## Prompt Used
+## 🗂️ Files
 
-See [`../prompt-engineering-framework/prompts/01-sentiment-classification.md`](../prompt-engineering-framework/prompts/01-sentiment-classification.md) for the full prompt template.
+- `README.md` — This file
