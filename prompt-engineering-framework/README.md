@@ -10,6 +10,8 @@
 
 A 5-step prompt engineering framework applied to a real customer support operation. Analyzed 50 genuine customer complaints, identified systemic failure patterns, and proposed a fully AI-redesigned workflow with projected impact metrics.
 
+**Presentation:** [Customer Support AI Redesign Slides](https://docs.google.com/presentation/d/1lZIwglZciKQPC512A-meoRBNxow4y3X_l7ssMk3G3MM/edit?usp=sharing)
+
 ---
 
 ## 🔢 The 5-Step Framework
@@ -57,4 +59,6 @@ A 5-step prompt engineering framework applied to a real customer support operati
 ## 🗂️ Files
 
 - `README.md` — This file
-- `presentation/` — Google Slides deck exported as PDF
+- [Customer Support AI Redesign Slides](https://docs.google.com/presentation/d/1lZIwglZciKQPC512A-meoRBNxow4y3X_l7ssMk3G3MM/edit?usp=sharing)
+
+**Updated by Perplexity AI Assistant**
