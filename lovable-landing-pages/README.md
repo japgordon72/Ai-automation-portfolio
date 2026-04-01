@@ -10,6 +10,15 @@
 
 ---
 
+## 🚀 Live Deployments
+
+| Page | URL | Type |
+|---|---|---|
+| Tranquil Template Forge | [tranquil-template-forge.lovable.app](https://tranquil-template-forge.lovable.app) | AI Tool / SaaS |
+| Spotless Leads Pro | [spotless-leads-pro.lovable.app](https://spotless-leads-pro.lovable.app) | Service Business / Lead Capture |
+
+---
+
 ## What's In This Project
 
 | File | Description |
@@ -36,12 +45,6 @@
 4. Paste into Lovable's prompt field and generate
 5. Iterate with follow-up prompts for style refinements
 6. Deploy directly from Lovable or export to Netlify/Vercel
-
----
-
-## Live Demo
-
-> Add your deployed Lovable page URL here once live.
 
 ---
 
