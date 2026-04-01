@@ -1,51 +1,51 @@
-# AI Knowledge-Base Chatbot with Zapier
+# 🤖 Zapier Hotel Knowledge Chatbot
 
-**Problem:** Customer service teams waste hours answering the same FAQ questions repeatedly, creating bottlenecks and slow response times.
-
-**Solution:** A Zapier-powered chatbot that connects to a Google Sheets knowledge base, uses GPT-4o to generate contextual answers from that data, and automatically logs all conversations — built entirely without code.
-
-**Impact:** Automated FAQ responses 24/7; frees support staff for complex issues only.
-
-**Tech Stack:** Zapier Chatbots · OpenAI GPT-4o · Google Sheets · Zapier Tables
+**Type:** AI Chatbot with Knowledge Base  
+**Tools:** Zapier · PDF Knowledge Base · Chatbot Interface  
+**Program:** TripleTen AI Automation Specialist
 
 ---
 
-## Workflow Architecture
+## 📋 Project Overview
 
-```
-New Chat Message (Zapier Chatbot trigger)
-  → Google Sheets: lookup matching FAQ row by keyword
-  → OpenAI GPT-4o: generate answer using KB context
-  → Zapier Chatbot: send reply to user
-  → Google Sheets: log conversation to Chat Logs sheet
-```
+A hotel customer service chatbot powered by a PDF knowledge base. The bot answers guest questions using uploaded documentation and handles unrecognized queries with professional fallback responses.
 
-## Files
+---
 
-| File | Description |
-|---|---|
-| `workflow-faq-chatbot.json` | Zapier Zap configuration |
-| `Sprint 2 final project.docx` | Sprint project documentation |
+## ⚙️ How It Works
 
-## Knowledge Base Schema
+1. Guest submits a question through the chat interface
+2. **Zapier** routes the query to the knowledge base
+3. Bot searches the **PDF knowledge base** for relevant answers
+4. If found: returns accurate, sourced response
+5. If not found: delivers professional fallback + escalation path
 
-Your Google Sheet (`FAQ` tab) should have these columns:
+---
 
-| keyword | question | answer | details | category | last_updated |
-|---|---|---|---|---|---|
-| shipping | How long does shipping take? | 3–5 business days | Standard shipping via USPS | Logistics | 2026-01-01 |
+## 🛠️ Tech Stack
 
-## Setup
+| Tool | Role |
+|------|------|
+| Zapier | Workflow orchestration |
+| PDF Knowledge Base | Source of truth for hotel info |
+| AI (LLM) | Response generation |
+| Chatbot Interface | Guest-facing interaction layer |
 
-1. Create a Zapier account and enable Zapier Chatbots
-2. Build the Zap following the `workflow-faq-chatbot.json` configuration
-3. Create a Google Sheet with the FAQ schema above
-4. Replace `{{KNOWLEDGE_BASE_SHEET_ID}}` and `{{LOGGING_SHEET_ID}}` with your Sheet IDs
-5. Add your OpenAI API key to Zapier's OpenAI integration
-6. Publish your chatbot and embed the widget on your site
+---
 
-## Customization
+## 💬 Fallback Handling
 
-- Add a Slack notification step for unanswered questions
-- Expand the KB with a `PDF Knowledge Base` tab for product manuals
-- Add a sentiment check to auto-escalate frustrated users to a human
+When the bot cannot answer confidently, it responds:
+> *"I don't have that information on hand, but our team would be happy to help. Please contact the front desk at [number] or email [address]."*
+
+---
+
+## 📁 Sprint Notes
+
+> Sprint 2 documentation — see project files for workflow diagrams and sprint deliverable.
+
+---
+
+## 🗂️ Files
+
+- `README.md` — This file
