@@ -19,6 +19,8 @@ An automated pipeline that accepts article or book content via Google Form, send
 3. **OpenAI (ChatGPT)** processes the content and returns structured JSON
 4. **Gmail** sends the formatted summary to the user automatically
 
+![Make.com Workflow Screenshot](Screenshot-2026-04-01-081926.jpg)
+
 ---
 
 ## 🧠 AI Output Structure (JSON)
@@ -47,12 +49,9 @@ An automated pipeline that accepts article or book content via Google Form, send
 
 ---
 
-## 📸 Screenshots
-
-> Screenshots coming soon — workflow built independently, visual documentation in progress.
-
----
-
 ## 🗂️ Files
 
 - `README.md` — This file
+- ![Workflow Screenshot](Screenshot-2026-04-01-081926.jpg)
+
+**Updated by Perplexity AI Assistant**
