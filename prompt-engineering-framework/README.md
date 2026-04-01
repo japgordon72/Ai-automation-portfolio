@@ -1,73 +1,60 @@
-# 🧠 Prompt Engineering Framework
+# 🧠 AI-Powered Customer Support Solution
 
-> **Stack:** OpenAI GPT-4o · Claude · Gemini · DeepSeek · Google AI Studio  
-> **Sprint:** 1 — TripleTen AI Automation Bootcamp (2026)  
-> **Type:** LLM Benchmarking + Reusable Prompt Library
-
----
-
-## 🎯 Problem
-
-Inconsistent AI outputs were causing 2+ hours of manual report rework per week. Different team members were prompting LLMs differently, producing unreliable results with no standardization across models or use cases.
+**Type:** Prompt Engineering Framework  
+**Program:** TripleTen AI Automation Specialist  
+**Tools:** Prompt Engineering · Google Slides · LLM Analysis  
 
 ---
 
-## ⚙️ Solution
+## 📋 Project Overview
 
-A structured prompt engineering framework that:
-- Benchmarks **6 leading LLMs** across 4 task categories
-- Standardizes prompt patterns using **role prompts**, **chain-of-thought reasoning**, and **decision matrices**
-- Provides a **reusable library** of battle-tested prompt templates for business automation
+A 5-step prompt engineering framework applied to a real customer support operation. Analyzed 50 genuine customer complaints, identified systemic failure patterns, and proposed a fully AI-redesigned workflow with projected impact metrics.
 
 ---
 
-## 💥 Impact
+## 🔢 The 5-Step Framework
 
-| Metric | Before | After |
-|---|---|---|
-| Report generation time | 2 hrs | 15 min |
-| Output accuracy | Baseline | +40% improvement |
-| Time savings | — | **87% faster** |
-
----
-
-## 📁 What's In This Folder
-
-| File | Description |
-|---|---|
-| `prompts/` | Reusable prompt templates by category |
-| `japheth AI-Powered Customer Support Workflow sprint 1.pptx` | Sprint 1 project presentation |
+| Step | Action | Output |
+|------|--------|--------|
+| 1 | Document current workflow | Full process map with pain-point annotations |
+| 2 | Identify problems from 50 complaints | Categorized data with frequency + impact scores |
+| 3 | Propose AI solutions | 4 targeted AI integrations matched to problems |
+| 4 | Redesign workflow with AI | Before/after flow with AI-augmented nodes |
+| 5 | Present findings | Google Slides executive presentation |
 
 ---
 
-## 📚 Prompt Categories
+## 🔍 Problems Identified (from 50 Complaints)
 
-- **Classification** — Categorize customer feedback, support tickets, or data records
-- **Summarization** — Condense long documents, articles, or meeting notes
-- **Extraction** — Pull structured data from unstructured text (invoices, emails, forms)
-- **Agent Instructions** — System prompts for autonomous AI agents and chatbots
-
----
-
-## 🤖 LLMs Benchmarked
-
-| Model | Best Use Case |
-|---|---|
-| GPT-4o | Complex reasoning, agent instructions |
-| Claude | Long-context summarization, nuanced writing |
-| Gemini | Multi-modal tasks, Google Workspace integration |
-| DeepSeek | Cost-efficient extraction and classification |
-| Google AI Studio | Rapid prototyping with Gemini models |
+| Problem | Frequency | Root Cause |
+|---------|-----------|------------|
+| Slow first response | 38% | No auto-acknowledgment system |
+| Misrouted tickets | 26% | Manual categorization errors |
+| Repetitive questions | 22% | No self-service layer |
+| No follow-up | 14% | Manual process dropped after resolution |
 
 ---
 
-## 🛠️ How to Use
+## 💡 AI Solutions Proposed
 
-1. Browse the `prompts/` folder and find the category matching your task
-2. Copy the template and replace `[BRACKETED]` placeholders with your specifics
-3. Test across 2-3 models using the decision matrix to pick the best fit
-4. Plug the winning prompt into your automation workflow (Make, Zapier, n8n, etc.)
+- **AI Auto-Responder** — 90-second acknowledgment on ticket creation
+- **NLP Intent Classifier** — LLM-powered routing with 94% accuracy
+- **FAQ Chatbot (RAG)** — Knowledge-base bot handles Tier-1 volume
+- **Automated Follow-Up** — Zapier/Make triggered 24-hr CSAT email
 
 ---
 
-*Part of the [Japheth Gordon AI Automation Portfolio](../README.md)*
+## 📈 Projected Impact
+
+- 82% reduction in first response time (4.2 hrs → 45 min)
+- 94% routing accuracy vs. 71% manual baseline
+- 40% ticket deflection via chatbot
+- +31 point CSAT improvement (58 → 89/100)
+- ~$3,200/month estimated cost savings
+
+---
+
+## 🗂️ Files
+
+- `README.md` — This file
+- `presentation/` — Google Slides deck exported as PDF
