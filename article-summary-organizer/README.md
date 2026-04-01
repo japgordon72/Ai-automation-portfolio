@@ -2,18 +2,25 @@
 
 **Article → AI summary → email delivery**
 
-## Flow  
-```
-Google Form → OpenAI → Structured JSON → Gmail
-```
+## Workflow
 
-![Workflow](./assets/workflow.jpg)
+```
+Google Form (Title + Content + Category)
+        ↓
+    Make.com
+        ↓
+  OpenAI ChatGPT
+        ↓
+  Structured JSON
+        ↓
+  Gmail (auto-send)
+```
 
 ## JSON Output
 ```json
 {
-  "key_takeaways": [...],
-  "action_items": [...],
+  "key_takeaways": ["point 1", "point 2", "point 3"],
+  "action_items": ["action 1", "action 2"],
   "has_actions": true
 }
 ```
