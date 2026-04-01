@@ -1,41 +1,58 @@
-# Article Summary Organizer
+# 📰 Article Summary Organizer
 
-**Problem:** Content teams spend 5–10 hrs/week manually reading, summarizing, and filing articles from RSS feeds and URLs.
-
-**Solution:** An n8n automation that monitors RSS feeds on a schedule, fetches the full article body, sends it to GPT-4o for structured summarization, and appends the result to a categorized Google Sheets knowledge base — fully automated, zero manual effort.
-
-**Impact:** 85% reduction in research time; always-on content intelligence pipeline.
-
-**Tech Stack:** n8n · OpenAI GPT-4o · Google Sheets · RSS Feed Reader
+**Type:** AI Content Automation  
+**Tools:** Make.com · OpenAI (ChatGPT) · Google Forms · Gmail  
+**Built by:** Japheth Gordon (independently)
 
 ---
 
-## Workflow Architecture
+## 📋 Project Overview
 
+An automated pipeline that accepts article or book content via Google Form, sends it to OpenAI for structured summarization, and emails the formatted output — all without any manual steps.
+
+---
+
+## ⚙️ How It Works
+
+1. User submits article text via **Google Form** (3 fields: Title, Content, Category)
+2. **Make.com** triggers on new form submission
+3. **OpenAI (ChatGPT)** processes the content and returns structured JSON
+4. **Gmail** sends the formatted summary to the user automatically
+
+---
+
+## 🧠 AI Output Structure (JSON)
+
+```json
+{
+  "title": "Article title",
+  "category": "Category submitted",
+  "key_takeaways": ["point 1", "point 2", "point 3"],
+  "action_items": ["action 1", "action 2"],
+  "related_context": "Brief background or connections",
+  "has_actions": true
+}
 ```
-Schedule Trigger (every 6hrs)
-  → Fetch RSS Feed items
-  → HTTP Request: pull full article body
-  → GPT-4o: structured summarization (JSON output)
-  → Code Node: parse JSON
-  → Google Sheets: append row to knowledge base
-```
 
-## Files
+---
 
-| File | Description |
-|---|---|
-| `workflow-rss-summarizer.json` | Importable n8n workflow |
-| `Japheth Gordon Article orgonizer final.pptx` | Sprint presentation deck |
+## 🛠️ Tech Stack
 
-## Setup
+| Tool | Role |
+|------|------|
+| Google Forms | User input collection |
+| Make.com | Workflow orchestration |
+| OpenAI GPT | Structured summarization |
+| Gmail | Automated email delivery |
 
-1. Import `workflow-rss-summarizer.json` into your n8n instance
-2. Set credentials: OpenAI API key, Google Sheets OAuth
-3. Replace `{{RSS_FEED_URL}}` with your target feed
-4. Replace `{{GOOGLE_SHEET_ID}}` with your Sheet ID
-5. Activate the workflow
+---
 
-## Prompt Used
+## 📸 Screenshots
 
-See [`../prompt-engineering-framework/prompts/02-article-summarization.md`](../prompt-engineering-framework/prompts/02-article-summarization.md) for the full prompt template powering this workflow.
+> Screenshots coming soon — workflow built independently, visual documentation in progress.
+
+---
+
+## 🗂️ Files
+
+- `README.md` — This file
